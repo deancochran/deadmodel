@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>Deadmodel mark</title>
+  <rect width="64" height="64" rx="8" fill="#25281e"/>
+  <path d="M12 44 28 20h8L20 44zm16 0 16-24h8L36 44z" fill="#d3ef80"/>
+</svg>
