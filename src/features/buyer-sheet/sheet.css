@@ -1,0 +1,261 @@
+@font-face {
+  font-family: "ADA Inter";
+  src: url("/brand/ada/inter.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+.ada-sheet,
+.ada-dialog {
+  --ada-mono: "Courier Prime", "Courier New", monospace;
+  --ada-sans: "ADA Inter", Arial, sans-serif;
+  --color-background: #fff;
+  --color-foreground: #101010;
+  --color-primary: #101010;
+  --color-primary-foreground: #fff;
+  --color-accent: #101010;
+  --color-accent-foreground: #fff;
+  --color-ring: #101010;
+  --color-border: #101010;
+  font-family: var(--ada-sans);
+  color: #101010;
+  color-scheme: light;
+}
+
+.ada-sheet {
+  --ada-gap: clamp(27px, 3.4vw, 56px);
+  --ada-columns: minmax(0, 0.785fr) minmax(0, 1.215fr);
+  --ada-thumb-space: calc(clamp(43px, 4vw, 68px) * 1.25 + 10px);
+  background: #fff;
+  min-height: 100svh;
+}
+.ada-sheet :focus-visible,
+.ada-dialog :focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+.ada-wrap {
+  width: min(1440px, calc(100% - clamp(36px, 7.25vw, 120px)));
+  margin-inline: auto;
+}
+.ada-skip:not(:focus) {
+  position: absolute;
+  clip-path: inset(50%);
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.ada-skip:focus {
+  position: absolute;
+  z-index: 20;
+  padding: 0.5rem;
+  background: white;
+}
+.ada-masthead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-block: clamp(24px, 2.4vw, 42px);
+  border-bottom: 1px solid;
+}
+.ada-wordmark {
+  width: clamp(159px, 16vw, 235px);
+}
+.ada-masthead nav,
+.ada-footer {
+  gap: clamp(12px, 2.3vw, 38px);
+  font: 0.875rem / 1.4 var(--ada-mono);
+}
+.ada-masthead nav a[aria-current],
+.ada-masthead a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.ada-masthead .ada-print {
+  border: 1px solid;
+  border-radius: 0;
+  box-shadow: none;
+  font: inherit;
+  height: auto;
+  padding: 8px 12px;
+  background: white;
+  color: #101010;
+}
+.ada-masthead .ada-print:hover {
+  background: #101010;
+  color: white;
+}
+.ada-product {
+  display: grid;
+  grid-template-columns: var(--ada-columns);
+  column-gap: var(--ada-gap);
+  grid-template-rows: auto 1fr auto var(--ada-thumb-space);
+  align-items: start;
+  margin-block: clamp(24px, 2.45vw, 42px) clamp(36px, 4.3vw, 74px);
+}
+.ada-product h1 {
+  grid-area: 1 / 2;
+  font: 580 clamp(1.95rem, 3.04vw, 3.03rem) / 1.03 var(--ada-sans);
+  letter-spacing: -0.062em;
+  text-wrap: balance;
+  margin-top: -3px;
+}
+.ada-product > .ada-gallery {
+  grid-area: 1 / 1 / 5 / 2;
+  min-width: 0;
+}
+.ada-product > form {
+  grid-area: 3 / 2;
+  min-width: 0;
+}
+.ada-intro {
+  grid-area: 2 / 2;
+  padding-block: clamp(23px, 2vw, 34px) 36px;
+  font: 1rem / 1.59 var(--ada-mono);
+  max-width: 48ch;
+}
+.ada-notes {
+  border-top: 1px solid;
+  padding-block: 20px clamp(36px, 4vw, 68px);
+}
+.ada-notes h2 {
+  margin-bottom: 22px;
+  font: 1.125rem / 1.25 var(--ada-mono);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.ada-notes-grid {
+  display: grid;
+  grid-template-columns: var(--ada-columns);
+  gap: var(--ada-gap);
+  align-items: start;
+}
+.ada-story {
+  grid-area: 1 / 2;
+  font: 1rem / 1.59 var(--ada-mono);
+  max-width: 54ch;
+}
+.ada-story h3 {
+  font: clamp(1.55rem, 2.15vw, 2.3rem) / 1.15 var(--ada-mono);
+  letter-spacing: -0.065em;
+  margin-bottom: 22px;
+}
+.ada-story p + p {
+  margin-top: 17px;
+}
+.ada-cards {
+  grid-area: 1 / 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+.ada-cards img {
+  border: 1px solid;
+  width: 100%;
+}
+.ada-footer {
+  border-top: 1px solid;
+  padding-block: 19px 25px;
+}
+
+@media screen and (max-width: 1090px) and (min-width: 761px) {
+  .ada-sheet {
+    --ada-gap: 24px;
+    --ada-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
+  }
+}
+@media screen and (max-width: 760px) {
+  .ada-wrap {
+    width: calc(100% - 36px);
+  }
+  .ada-masthead {
+    padding-block: 22px 17px;
+  }
+  .ada-wordmark {
+    width: clamp(120px, 24vw, 176px);
+  }
+  .ada-masthead nav {
+    font-size: 0.8125rem;
+  }
+  .ada-product {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-block: 22px 36px;
+  }
+  .ada-product h1 {
+    margin: 0 0 17px;
+    max-width: 30ch;
+    font-size: clamp(1.8rem, 6.1vw, 2.5rem);
+  }
+  .ada-intro {
+    padding-block: 21px;
+  }
+  .ada-notes-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .ada-cards {
+    max-width: 500px;
+  }
+}
+@media screen and (max-width: 510px) {
+  .ada-masthead a[href="#sheet"],
+  .ada-print span {
+    display: none;
+  }
+  .ada-masthead .ada-print {
+    width: 34px;
+    height: 34px;
+    padding: 6px;
+  }
+}
+
+@page ada-sheet {
+  size: auto;
+  margin: 12mm;
+}
+@media print {
+  .ada-sheet {
+    page: ada-sheet;
+    min-height: 0;
+    print-color-adjust: exact;
+  }
+  body:has(.ada-sheet) {
+    background: white;
+  }
+  .ada-wrap {
+    width: 100%;
+  }
+  .ada-masthead {
+    padding: 0 0 6mm;
+  }
+  .ada-wordmark {
+    width: 43mm;
+  }
+  .ada-masthead nav,
+  .ada-notes,
+  .ada-footer,
+  .ada-skip {
+    display: none;
+  }
+  .ada-product {
+    margin: 7mm 0 0;
+    grid-template-columns: 38% 1fr;
+    grid-template-rows: auto auto 1fr;
+    column-gap: 5mm;
+    break-inside: avoid;
+  }
+  .ada-product h1 {
+    font-size: 21pt;
+  }
+  .ada-product > .ada-gallery {
+    grid-row: 1 / 4;
+  }
+  .ada-intro {
+    padding: 4mm 0;
+    font-size: 9pt;
+  }
+}
