@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="The dead model buyer sheet for ADA low-rise wax black fringe denim. Garment photographs, materials, and wholesale details.">
+  <title>dead model — ADA denim buyer sheet</title>
+  <link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="sheet.css">
+  <script src="sheet.js" defer></script>
+  <script src="checkout.js" defer></script>
+</head>
+<body id="top">
+  <a href="#sheet" class="skip">Skip to buyer sheet</a>
+  <header class="masthead page-width">
+    <a href="#top" aria-label="dead model home"><img class="wordmark" src="assets/dead-model-wordmark.png" width="446" height="67" alt="dead model"></a>
+    <nav aria-label="Page navigation">
+      <a href="#sheet" aria-current="location">Buyer sheet</a>
+      <a href="#notes">Brand notes</a>
+      <button class="print-button" id="print" type="button" aria-label="Print sheet" title="Print sheet"><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M5.5 6.5V2h9v4.5m0 7.5H18V7H2v7h3.5M5.5 11h9v7h-9z"/><path d="M14.7 9H16"/></svg><span>Print sheet</span></button>
+    </nav>
+  </header>
+  <main class="page-width">
+    <section class="product" id="sheet" aria-labelledby="product-title">
+      <section class="gallery" aria-label="ADA garment gallery">
+        <button id="enlarge" type="button" class="main-photo" aria-label="Enlarge full length photograph">
+          <img id="hero" src="assets/ada-denim.webp" width="614" height="796" alt="Front of the ADA jean on a model, showing black flared legs, side fringe, and turquoise-colored embellishments." fetchpriority="high">
+          <span class="expand-icon"><svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7.5 3H3v4.5M12.5 3H17v4.5M3 12.5V17h4.5M17 12.5V17h-4.5"/></svg></span>
+        </button>
+        <div class="gallery-bottom">
+          <fieldset class="thumbs"><legend class="sr-only">Select garment photograph</legend>
+            <button data-view="denim" type="button" aria-label="Show full length" aria-pressed="true"><img src="assets/ada-denim.webp" alt=""></button>
+            <button data-view="pockets" type="button" aria-label="Show pocket detail" aria-pressed="false"><img src="assets/ada-pockets.webp" alt=""></button>
+            <button data-view="fringe" type="button" aria-label="Show fringe detail" aria-pressed="false"><img src="assets/ada-fringe.webp" alt=""></button>
+            <button data-view="hem" type="button" aria-label="Show flared hem" aria-pressed="false"><img src="assets/ada-hem.webp" alt=""></button>
+          </fieldset>
+          <span class="view-count" id="view-count" aria-live="polite">01 / 04</span>
+        </div>
+      </section>
+      <div class="product-record">
+        <div class="product-heading">
+          <h1 id="product-title">ADA LOW-RISE WAX BLACK FRINGE DENIM <span>(12.5oz)</span></h1>
+        </div>
+        <div class="product-intro">
+          <p>Cut low on the hip, with a flared hem that falls over the shoe. Deer suede fringe follows the outer leg. Turquoise-colored stones sit against the waxed black denim.</p>
+        </div>
+        <form class="buyer-form" id="buyer-form" aria-label="Order ADA denim" novalidate>
+          <div class="buyer-strip">
+            <fieldset class="buyer-type">
+              <legend class="sr-only">Buyer type</legend>
+              <label><input type="radio" name="buyer" value="individual" data-unit="140" checked><span>Individual</span></label>
+              <label><input type="radio" name="buyer" value="boutique" data-unit="70"><span>Wholesale boutique</span></label>
+            </fieldset>
+            <span class="unit-price" id="unit-price">$140 / pair</span>
+          </div>
+          <div class="order-block">
+          <dl class="specs">
+            <div><dt>Style</dt><dd>Low rise<br>Flare<br>Fringe</dd></div>
+            <div><dt>Color</dt><dd>Waxed black</dd></div>
+            <div><dt>Material</dt><dd>98% cotton<br>2% spandex<br>Deer suede</dd></div>
+            <div><dt>Price</dt><dd>Wholesale $70<br>RRP $140</dd></div>
+          </dl>
+          <table class="sizes"><caption class="sr-only">Purchase quantities by size</caption><thead><tr><th scope="col">Size</th><th scope="col">Qty</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">XS</th><td><input type="text" inputmode="numeric" pattern="[0-9]*" name="qty-XS" data-size="XS" aria-label="XS quantity" maxlength="5" autocomplete="off"></td></tr>
+              <tr><th scope="row">S</th><td><input type="text" inputmode="numeric" pattern="[0-9]*" name="qty-S" data-size="S" aria-label="S quantity" maxlength="5" autocomplete="off"></td></tr>
+              <tr><th scope="row">M</th><td><input type="text" inputmode="numeric" pattern="[0-9]*" name="qty-M" data-size="M" aria-label="M quantity" maxlength="5" autocomplete="off"></td></tr>
+              <tr><th scope="row">L</th><td><input type="text" inputmode="numeric" pattern="[0-9]*" name="qty-L" data-size="L" aria-label="L quantity" maxlength="5" autocomplete="off"></td></tr>
+            </tbody>
+          </table>
+          </div>
+          <div class="purchase-strip">
+            <div class="purchase-total"><span>Subtotal</span><output id="sheet-subtotal" aria-live="polite">$0</output></div>
+            <button type="submit" class="primary-action" id="buy-now" aria-haspopup="dialog">Buy now</button>
+          </div>
+          <p class="quantity-error" id="quantity-error" role="alert" hidden></p>
+        </form>
+      </div>
+    </section>
+    <section class="notes" id="notes" aria-labelledby="brand-heading">
+      <header><h2 id="brand-heading">Brand notes</h2></header>
+      <div class="notes-grid">
+        <figure class="print-cards" aria-label="Front and reverse of the dead model print card">
+          <img src="assets/fringe-poster.webp" width="478" height="620" alt="Front of the dead model card, a black ink silhouette of fringed denim." loading="lazy">
+          <img src="assets/signature-card.webp" width="478" height="620" alt="Reverse of the print card, with the dead model wordmark and handwritten signature." loading="lazy">
+        </figure>
+        <div class="editorial">
+          <h3>Broadway, after curtain call.</h3>
+          <p>The lashes stay on. Somebody at the stage door knows where the party is. dead model takes its cue from the divas who carry a little of the show out into the street.</p>
+          <p>The ADA sits low and moves with you. Its wax catches the light, the fringe swings with the beat, and the dance floor is yours. You take the stage.</p>
+        </div>
+      </div>
+    </section>
+    <section class="campaign" id="campaign" aria-labelledby="campaign-heading">
+      <div class="campaign-title"><h2 tabindex="-1" id="campaign-heading">ADA campaign film</h2><p>Film in production.</p></div>
+      <p hidden role="status" class="campaign-status" id="campaign-status">Boutique checkout preview complete.</p>
+    </section>
+  </main>
+  <footer class="page-width"><a href="#top" aria-label="dead model home"><img class="footer-wordmark" src="assets/dead-model-wordmark.png" width="446" height="67" alt="dead model"></a><a href="#sheet" class="text-link">Back to buyer sheet</a></footer>
+  <dialog id="viewer" aria-labelledby="viewer-title">
+    <header><h2 id="viewer-title">ADA / Full length</h2><button type="button" id="close" aria-label="Close photograph">Close <span aria-hidden="true">×</span></button></header>
+    <img id="viewer-image" src="assets/ada-denim.webp" alt="">
+    <div class="viewer-foot"><button id="previous" type="button">Previous</button><span id="viewer-count" aria-live="polite"></span><button id="next" type="button">Next</button></div>
+  </dialog>
+  <dialog id="checkout" class="checkout" aria-labelledby="checkout-heading" aria-describedby="preview-note">
+    <header class="checkout-head">
+      <h2 id="checkout-heading" tabindex="-1">Checkout preview</h2>
+      <button type="button" class="close-panel" id="close-checkout" aria-label="Close checkout">×</button>
+    </header>
+    <div class="checkout-content">
+      <p id="preview-note" class="preview-note">Demo only. No payment is collected.</p>
+      <section id="order-review" aria-label="Order review">
+        <div class="checkout-product">
+          <img src="assets/ada-denim.webp" alt="" width="614" height="796">
+          <div><p class="buyer-caption" id="review-buyer"></p><h3>ADA fringe denim</h3><p id="review-price"></p></div>
+        </div>
+        <table class="line-items">
+          <caption class="sr-only">Selected quantities and amounts</caption>
+          <thead><tr><th scope="col">Size</th><th scope="col">Qty</th><th scope="col">Amount</th></tr></thead>
+          <tbody id="review-lines"></tbody>
+        </table>
+        <div class="review-subtotal"><span>Subtotal</span><strong id="review-subtotal"></strong></div>
+        <button type="button" class="primary-action panel-action" id="complete-preview">Complete preview</button>
+        <button type="button" class="plain-button" id="edit-order">Edit quantities</button>
+      </section>
+      <section id="gift-preview" aria-label="Early buyer gift preview" hidden>
+        <p class="gift-heading">One of one.</p>
+        <p class="gift-copy">The first 30 individual buyers get to choose an upcycled shirt with their jeans. Try the gift selection for an eligible order below.</p>
+        <form id="gift-form">
+          <label for="sample-shirt">Sample gift</label>
+          <select id="sample-shirt" required>
+            <option value="">Choose a sample shirt</option>
+            <option>Sample shirt A</option><option>Sample shirt B</option><option>Sample shirt C</option>
+          </select>
+          <button class="primary-action panel-action" type="submit">Preview gift choice</button>
+        </form>
+        <p id="gift-result" class="gift-result" role="status" hidden></p>
+        <button type="button" class="plain-button" id="finish-gift">Return to buyer sheet</button>
+      </section>
+    </div>
+  </dialog>
+</body>
+</html>
