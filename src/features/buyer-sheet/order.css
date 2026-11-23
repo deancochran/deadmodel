@@ -1,0 +1,497 @@
+.ada-order-form {
+  border: 1px solid currentColor;
+  color: inherit;
+  font-family: var(--ada-mono, ui-monospace, monospace);
+  min-width: 0;
+}
+
+.ada-order-sr-only {
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.ada-order-strip,
+.ada-order-purchase {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  padding: 10px 14px;
+}
+
+.ada-order-strip {
+  border-bottom: 1px solid currentColor;
+}
+
+.ada-order-tiers {
+  border: 0;
+  display: flex;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+}
+
+.ada-order-tiers label {
+  cursor: pointer;
+  position: relative;
+}
+
+.ada-order-tiers input {
+  opacity: 0;
+  position: absolute;
+}
+
+.ada-order-tiers span {
+  border: 1px solid currentColor;
+  display: block;
+  font-size: 0.875rem;
+  line-height: 1.25;
+  padding: 7px 9px;
+}
+
+.ada-order-tiers label + label span {
+  border-left: 0;
+}
+
+.ada-order-tiers input:checked + span,
+.ada-order-buy {
+  background: #101010;
+  color: white;
+}
+
+.ada-order-tiers input:focus-visible + span,
+.ada-order-sizes input:focus-visible,
+.ada-order-dialog button:focus-visible,
+.ada-order-buy:focus-visible {
+  outline: 2px solid #101010;
+  outline-offset: 3px;
+}
+
+.ada-order-unit-price {
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.ada-order-block {
+  align-items: stretch;
+  display: grid;
+  gap: clamp(12px, 1.2vw, 23px);
+  grid-template-columns: minmax(0, 1fr) minmax(92px, 18%);
+  padding: clamp(14px, 1.25vw, 22px);
+}
+
+.ada-order-specs {
+  display: grid;
+  gap: 12px clamp(7px, 1.1vw, 19px);
+  grid-template-columns: 1fr 1.06fr;
+  margin: 0;
+  padding: 0;
+}
+
+.ada-order-specs > div {
+  align-items: center;
+  display: grid;
+  gap: clamp(8px, 0.8vw, 16px);
+  grid-template-columns: clamp(67px, 5vw, 76px) minmax(0, 1fr);
+}
+
+.ada-order-specs dt {
+  aspect-ratio: 1;
+  border: 1px solid currentColor;
+  display: grid;
+  font-family: ui-sans-serif, sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.05;
+  min-height: 56px;
+  place-items: center;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.ada-order-specs dd {
+  font-family: ui-sans-serif, sans-serif;
+  font-size: clamp(0.8125rem, 1.04vw, 1rem);
+  letter-spacing: -0.032em;
+  line-height: 1.31;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.ada-order-sizes,
+.ada-order-lines {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.ada-order-sizes {
+  font-size: 0.8125rem;
+  line-height: 1;
+  table-layout: fixed;
+  text-align: center;
+}
+
+:where(.ada-order-sizes) th,
+:where(.ada-order-sizes) td {
+  border: 1px solid currentColor;
+  padding: 0;
+}
+
+:where(.ada-order-sizes) th {
+  font-weight: 400;
+}
+
+:where(.ada-order-sizes thead) th {
+  font-family: ui-sans-serif, sans-serif;
+  font-size: 0.75rem;
+  padding: 5px 0;
+  text-transform: uppercase;
+}
+
+:where(.ada-order-sizes tbody) th {
+  height: 24px;
+}
+
+.ada-order-sizes input {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  display: block;
+  font: inherit;
+  min-height: 24px;
+  padding: 3px 0;
+  text-align: center;
+  width: 100%;
+}
+
+.ada-order-sizes input[aria-invalid="true"] {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}
+
+.ada-order-print-quantity {
+  display: none;
+}
+
+.ada-order-size-error {
+  color: #9b1c1c;
+  display: block;
+  font-size: 0.6875rem;
+  line-height: 1.2;
+  padding: 2px;
+}
+
+.ada-order-purchase {
+  border-top: 1px solid currentColor;
+}
+
+.ada-order-total {
+  align-items: baseline;
+  display: flex;
+  font-size: 0.875rem;
+  gap: 12px;
+}
+
+.ada-order-total output {
+  font-family: ui-sans-serif, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.ada-order-buy {
+  border: 1px solid currentColor;
+  cursor: pointer;
+  font-family: ui-sans-serif, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  min-width: 132px;
+  padding: 11px 24px;
+}
+
+.ada-order-preview-notice,
+.ada-order-hydration {
+  border-top: 1px solid currentColor;
+  font-size: 0.875rem;
+  margin: 0;
+  padding: 9px 14px;
+}
+
+.ada-order-hydration {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.ada-order-dialog {
+  font-family: var(--ada-mono, ui-monospace, monospace);
+  height: fit-content;
+  inset: 0 16px 0 auto;
+  margin: auto 0;
+  max-height: calc(100dvh - 32px);
+  width: min(380px, 93vw);
+}
+
+.ada-order-dialog-head {
+  align-items: center;
+  border-bottom: 1px solid currentColor;
+  display: flex;
+  justify-content: space-between;
+  padding: 11px 16px;
+}
+
+.ada-order-dialog-head h2 {
+  font: inherit;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.ada-order-close {
+  background: transparent;
+  border: 1px solid currentColor;
+  color: inherit;
+  font:
+    1.45rem / 1 ui-sans-serif,
+    sans-serif;
+  height: 33px;
+  padding: 0;
+  width: 33px;
+}
+
+.ada-order-dialog-content {
+  padding: 16px 18px;
+}
+
+.ada-order-dialog-content > p,
+.ada-order-product p {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.ada-order-dialog-content > p {
+  margin-bottom: 18px;
+}
+
+.ada-order-product {
+  align-items: center;
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.ada-order-product img {
+  display: block;
+  height: auto;
+  width: 61px;
+}
+
+.ada-order-product h3 {
+  font-family: ui-sans-serif, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1.15;
+  margin: 3px 0;
+}
+
+.ada-order-lines {
+  font-size: 0.9375rem;
+  line-height: 1.3;
+}
+
+:where(.ada-order-lines) th,
+:where(.ada-order-lines) td {
+  border-top: 1px solid currentColor;
+  font-weight: 400;
+  padding: 7px 0;
+  text-align: left;
+}
+
+.ada-order-lines :is(th, td):last-child {
+  text-align: right;
+}
+
+.ada-order-review-total {
+  align-items: center;
+  border-top: 1px solid currentColor;
+  display: flex;
+  font-size: 0.9375rem;
+  justify-content: space-between;
+  padding: 12px 0 18px;
+}
+
+.ada-order-review-total strong {
+  font-family: ui-sans-serif, sans-serif;
+  font-size: 1.2rem;
+}
+
+.ada-order-edit {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  font: inherit;
+  margin: 0 auto;
+  padding: 6px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+  .ada-order-specs > div {
+    align-content: start;
+    gap: 6px;
+    grid-template-columns: 1fr;
+  }
+
+  .ada-order-specs dt {
+    aspect-ratio: auto;
+    min-height: auto;
+    padding: 4px 7px;
+    width: fit-content;
+  }
+
+  .ada-order-sizes input {
+    font-size: 1rem;
+    min-height: 32px;
+  }
+
+  .ada-order-dialog {
+    inset: auto 0 0;
+    margin: 0;
+    max-height: 84dvh;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .ada-order-dialog-content {
+    padding-bottom: max(14px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (min-width: 761px) and (max-width: 1090px) {
+  .ada-order-block {
+    gap: 8px;
+    grid-template-columns: minmax(0, 1fr) 70px;
+    padding: 10px;
+  }
+
+  .ada-order-specs {
+    column-gap: 8px;
+  }
+
+  .ada-order-specs > div {
+    align-content: start;
+    gap: 5px;
+    grid-template-columns: 1fr;
+  }
+
+  .ada-order-specs dt {
+    aspect-ratio: auto;
+    justify-self: start;
+    min-height: 0;
+    padding: 4px 6px;
+  }
+}
+
+@media (max-width: 510px) {
+  .ada-order-strip {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .ada-order-tiers span {
+    font-size: 0.8125rem;
+    padding: 7px;
+  }
+
+  .ada-order-unit-price {
+    font-size: 0.8125rem;
+  }
+
+  .ada-order-block {
+    gap: 8px;
+    grid-template-columns: minmax(0, 1fr) 61px;
+    padding: 11px;
+  }
+
+  .ada-order-specs {
+    gap: 12px 8px;
+  }
+
+  .ada-order-specs dd {
+    font-size: 0.8125rem;
+  }
+}
+
+@media print {
+  .ada-order-preview-notice,
+  .ada-order-hydration,
+  .ada-order-buy,
+  .ada-order-dialog,
+  .ada-order-tiers label:has(input:not(:checked)) {
+    display: none;
+  }
+
+  .ada-order-form {
+    border-color: #000;
+  }
+
+  .ada-order-strip,
+  .ada-order-purchase {
+    padding: 2mm;
+  }
+
+  .ada-order-tiers span,
+  .ada-order-unit-price,
+  .ada-order-total,
+  .ada-order-total output {
+    font-size: 8pt;
+  }
+
+  .ada-order-tiers label + label span {
+    border-left: 1px solid currentColor;
+  }
+
+  .ada-order-specs {
+    gap: 2mm;
+  }
+
+  .ada-order-block {
+    grid-template-columns: minmax(0, 1fr) 24mm;
+    gap: 2mm;
+    padding: 2.5mm;
+  }
+
+  .ada-order-specs > div {
+    display: block;
+  }
+
+  .ada-order-specs dt {
+    aspect-ratio: auto;
+    font-size: 7pt;
+    margin-bottom: 1mm;
+    min-height: 0;
+    padding: 1mm;
+    width: fit-content;
+  }
+
+  .ada-order-specs dd,
+  .ada-order-sizes {
+    font-size: 8pt;
+  }
+
+  .ada-order-sizes input,
+  .ada-order-size-error {
+    display: none;
+  }
+
+  .ada-order-print-quantity {
+    display: block;
+    font: inherit;
+    padding: 1mm 0;
+  }
+}

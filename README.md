@@ -1,6 +1,6 @@
 # deadmodel
 
-A small, static TanStack Start site. Its first page pairs an SVG form study with a caption editor that works entirely in the browser. Edits reset on reload; nothing is stored or sent.
+A static TanStack Start site. The original form study remains at `/`; the ADA denim buyer sheet lives at `/buyer-sheet/`. Both work without a backend. The buyer sheet previews quantities and prices; it does **not** place an order, charge a card, reserve a shirt, or unlock campaign content.
 
 ## Develop
 
@@ -11,7 +11,18 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3000. Change the homepage in `src/routes/index.tsx`, the study and validated form in `src/components/study.tsx`, or the palette and typography in `src/styles.css`.
+Open http://localhost:3000/buyer-sheet/. The route prerenders its product, prices, printable size grid and brand notes. `src/features/buyer-sheet/ada.ts` is the source of garment specs, provisional size/SKU IDs, image order and unit prices in USD cents. `order.ts` validates the order draft and calculates the displayed quote. The browser's **Print** action or **Print sheet** produces a filled or blank line sheet on A4 or US Letter.
+
+### Assets and launch review
+
+`public/brand/ada/` contains temporary reference exports from the [prototype at f29a851](https://github.com/deancochran/deadmodel/tree/f29a851/public/buyer-sheet/assets), not final production masters. Keep the Inter OFL notice with its font. Asset URLs honor the Pages project prefix. Before the homepage cutover:
+
+- Replace/approve all four garment views (full length, pockets, fringe, hem), print-quality full-length photography, crops, alt text and usage rights. The fringe reference is only 200×259; it isn't a high-resolution zoom asset.
+- Replace/approve the wordmark, favicon artwork, front/reverse print cards, brand guide, and approved licensed sans/mono fonts. The mono face currently falls back to the system typewriter font.
+- Confirm the ADA garment copy and retail/wholesale prices. Check the screen layouts and A4/Letter proofs with the final font and photos.
+- Source loop/GIF masters with stills and the campaign video, poster, captions and rights once their placement and access are decided. They are not needed for this preview. Never put exclusive or unreleased originals in this public repository.
+
+Future commerce needs a commerce-capable host ([Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)) and trusted backend. Resolve SKU, authorized tier, stock, payment and fulfillment server-side. The retail first-30 distinct paid buyers need durable, atomic eligibility and one claim per unique shirt; a wholesale campaign needs its **own** paid-order entitlement and private media delivery if exclusive. Neither decision may be made from the browser or a success redirect.
 
 ## GitHub Pages
 
@@ -43,4 +54,4 @@ npm run check
 npm test
 ```
 
-`npm test` builds and type-checks the project, then runs Playwright against the static files at desktop and mobile sizes. It checks the no-JavaScript page, offline form validation, layout overflow, and automated accessibility rules with axe.
+`npm test` builds and type-checks the project, then runs Playwright against the static files at desktop and mobile sizes. To match the Pages job, use `PAGES_BASE_PATH=/deadmodel npm test`. Coverage includes no-JavaScript reading, gallery keyboard navigation, offline order review, accessibility with axe, and single-page blank/filled A4 and Letter PDFs in `test-results/`.

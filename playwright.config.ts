@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test'
 
-const baseURL = `http://127.0.0.1:4174${process.env.PAGES_BASE_PATH || ''}/`
+const port = process.env.PLAYWRIGHT_PORT || '4174'
+const baseURL = `http://127.0.0.1:${port}${process.env.PAGES_BASE_PATH || ''}/`
 
 export default defineConfig({
   testDir: './tests',
@@ -12,7 +13,7 @@ export default defineConfig({
   ],
   webServer: {
     command: 'node scripts/preview.mjs',
-    env: { PORT: '4174' },
+    env: { PORT: port },
     url: baseURL,
     reuseExistingServer: false,
   },
