@@ -82,3 +82,16 @@ export const ada = z
 
 export const printHero = ada.photos[0]
 export const assetUrl = (file: string) => `${import.meta.env.BASE_URL}brand/ada/${file}`
+
+// Public reference for the Small sample only. Order sizes are not measurement data.
+export const smallSampleMeasurements = [
+  { point: 'A', label: 'Waist width', note: '', inches: 14.5 },
+  { point: 'B', label: 'Front rise', note: 'Including waistband', inches: 6.75 },
+  { point: 'C', label: 'Back rise', note: 'Including waistband', inches: 11.25 },
+  { point: 'D', label: 'Hip width', note: '7 inches below waist', inches: 19.5 },
+  { point: 'E', label: 'Thigh width', note: 'Straight across at crotch', inches: 10.5 },
+  { point: 'F', label: 'Knee width', note: '33 cm below crotch', inches: 7.2 },
+  { point: 'G', label: 'Leg opening width', note: '', inches: 10.75 },
+  { point: 'H', label: 'Inseam', note: '', inches: 36 },
+  { point: 'I', label: 'Length', note: 'Outseam', inches: 40.75 },
+] as const

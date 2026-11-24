@@ -9,14 +9,6 @@
 .ada-dialog {
   --ada-mono: "Courier Prime", "Courier New", monospace;
   --ada-sans: "ADA Inter", Arial, sans-serif;
-  --color-background: #fff;
-  --color-foreground: #101010;
-  --color-primary: #101010;
-  --color-primary-foreground: #fff;
-  --color-accent: #101010;
-  --color-accent-foreground: #fff;
-  --color-ring: #101010;
-  --color-border: #101010;
   font-family: var(--ada-sans);
   color: #101010;
   color-scheme: light;
@@ -202,7 +194,7 @@
   }
 }
 @media screen and (max-width: 510px) {
-  .ada-masthead a[href="#sheet"],
+  .ada-masthead a[href="#shop"],
   .ada-print span {
     display: none;
   }
@@ -216,6 +208,14 @@
 @page ada-sheet {
   size: auto;
   margin: 12mm;
+}
+@keyframes ada-guide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 @media print {
   .ada-sheet {

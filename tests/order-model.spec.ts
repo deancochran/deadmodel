@@ -5,7 +5,7 @@ import {
   orderSchema,
   quantityMessage,
   quoteOrder,
-} from '../src/features/buyer-sheet/order'
+} from '../src/features/storefront/order'
 
 test('quotes selected sizes in cents for the selected tier', () => {
   const quote = quoteOrder({

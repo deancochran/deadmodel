@@ -2,10 +2,10 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 import { PDFDocument } from 'pdf-lib'
 
-const path = './buyer-sheet/'
+const path = './'
 const tags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
 
-test('home links to a sheet whose photos and font load under the configured mount', async ({
+test('home is the shop; section links keep the order and stay in the same document', async ({
   page,
 }) => {
   const failures: string[] = []
@@ -13,9 +13,12 @@ test('home links to a sheet whose photos and font load under the configured moun
     if (!response.ok() && response.status() >= 400) failures.push(response.url())
   })
   await page.goto('./')
-  await page.getByRole('link', { name: 'ADA buyer sheet' }).click()
-  await expect(page).toHaveTitle('ADA denim buyer sheet — dead model')
-  await page.locator('#notes').scrollIntoViewIfNeeded()
+  await expect(page).toHaveTitle('dead model — ADA fringe denim')
+  const home = page.url()
+  await expect(page.locator('body')).not.toContainText(/buyer sheet|form studies/i)
+  await page.getByLabel('M quantity', { exact: true }).fill('1')
+  await page.getByRole('link', { name: 'Brand notes' }).click()
+  await expect(page).toHaveURL(`${home}#notes`)
   await expect
     .poll(() =>
       page
@@ -30,17 +33,24 @@ test('home links to a sheet whose photos and font load under the configured moun
     return faces.length > 0 && faces.every((face) => face.status === 'loaded')
   })
   expect(loaded).toBe(true)
+  await page.getByRole('link', { name: 'Back to shop' }).click()
+  await expect(page).toHaveURL(`${home}#shop`)
+  await expect(page.getByLabel('M quantity', { exact: true })).toHaveValue('1')
   expect(failures).toEqual([])
 })
 
-test.describe('prerendered ADA sheet', () => {
+test('the former product URL is not a separate page', async ({ request }) => {
+  expect((await request.get('./buyer-sheet/')).status()).toBe(404)
+})
+
+test.describe('prerendered storefront', () => {
   test.use({ javaScriptEnabled: false })
   test('direct link serves the garment, price list, story and blank paper grid', async ({
     page,
   }) => {
     const response = await page.goto(path)
     expect(response?.status()).toBe(200)
-    await expect(page).toHaveTitle('ADA denim buyer sheet — dead model')
+    await expect(page).toHaveTitle('dead model — ADA fringe denim')
     await expect(page.getByRole('heading', { level: 1 })).toContainText('ADA LOW-RISE')
     await expect(page.getByRole('heading', { name: 'Broadway, after curtain call.' })).toBeVisible()
     await expect(page.locator('main')).toContainText('$140')

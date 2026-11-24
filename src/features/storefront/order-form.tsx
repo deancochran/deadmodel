@@ -18,6 +18,7 @@ import {
   quoteOrder,
   type ValidOrder,
 } from './order'
+import { SizeGuide } from './size-guide'
 import './order.css'
 
 export function OrderForm() {
@@ -161,6 +162,7 @@ export function OrderForm() {
               })}
             </tbody>
           </table>
+          <SizeGuide disabled={!hydrated} />
         </div>
         {fieldErrors.length > 0 && (
           <div className="ada-order-preview-notice" role="alert">
