@@ -8,8 +8,7 @@ const config = defineConfig({
   resolve: { tsconfigPaths: true },
   plugins: [
     tailwindcss(),
-    // Both routes are statically discovered; do not enqueue their base-prefixed
-    // links again when publishing at /deadmodel/.
+    // Ship one prerendered storefront. Its sections and dialogs need no routes.
     tanstackStart({ prerender: { enabled: true, failOnError: true, crawlLinks: false } }),
     viteReact(),
   ],

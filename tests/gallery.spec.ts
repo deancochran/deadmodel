@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 test.describe('ADA garment gallery', () => {
   test('selects photos and keeps the hero and thumbnail states in sync', async ({ page }) => {
-    await page.goto('./buyer-sheet/')
+    await page.goto('./')
 
     const gallery = page.locator('.ada-gallery')
     const hero = gallery.getByRole('button', { name: 'Enlarge full length photograph' })
@@ -29,7 +29,7 @@ test.describe('ADA garment gallery', () => {
   test('provides a named lightbox with wraparound navigation and restores focus', async ({
     page,
   }) => {
-    await page.goto('./buyer-sheet/')
+    await page.goto('./')
 
     const gallery = page.locator('.ada-gallery')
     const hero = gallery.getByRole('button', { name: 'Enlarge full length photograph' })
@@ -56,7 +56,7 @@ test.describe('ADA garment gallery', () => {
   })
 
   test('closes the lightbox from its backdrop', async ({ page }) => {
-    await page.goto('./buyer-sheet/')
+    await page.goto('./')
     await page.getByRole('button', { name: 'Enlarge full length photograph' }).click()
 
     const lightbox = page.getByRole('dialog', { name: /^ADA \// })

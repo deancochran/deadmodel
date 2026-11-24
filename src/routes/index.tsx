@@ -1,51 +1,23 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
-import { Study } from '@/components/study'
+import { createFileRoute } from '@tanstack/react-router'
+import { assetUrl } from '@/features/storefront/ada'
+import { Storefront } from '@/features/storefront/storefront'
+import shopCss from '@/features/storefront/storefront.css?url'
 
 export const Route = createFileRoute('/')({
-  component: Home,
   head: () => ({
     meta: [
-      { title: 'deadmodel / Form studies' },
+      { title: 'dead model — ADA fringe denim' },
       {
         name: 'description',
         content:
-          'An open sketchbook for experiments in line, shape, and repetition. Explore the first deadmodel form study.',
+          'Explore the ADA low-rise wax black fringe denim by dead model. See the fit, choose sizes and preview a retail or wholesale order.',
       },
+      { name: 'theme-color', content: '#ffffff' },
     ],
-    links: [{ rel: 'icon', href: `${import.meta.env.BASE_URL}mark.svg`, type: 'image/svg+xml' }],
+    links: [
+      { rel: 'stylesheet', href: shopCss },
+      { rel: 'icon', href: assetUrl('mark.svg'), type: 'image/svg+xml' },
+    ],
   }),
+  component: Storefront,
 })
-
-function Home() {
-  return (
-    <div className="mx-auto max-w-6xl px-5 sm:px-10">
-      <header className="folio flex items-center justify-between gap-3 border-b border-foreground py-5">
-        <span className="flex items-center gap-3">
-          <img src={`${import.meta.env.BASE_URL}mark.svg`} width="28" height="28" alt="" />
-          Form studies
-        </span>
-        <Link to="/buyer-sheet" className="text-muted-foreground underline underline-offset-4">
-          ADA buyer sheet
-        </Link>
-      </header>
-      <main>
-        <div className="pb-9 pt-12 sm:pb-12 sm:pt-16">
-          <h1 className="text-[clamp(3.5rem,14vw,10rem)] font-semibold leading-[0.9] tracking-[-0.09em]">
-            deadmodel
-            <span aria-hidden="true" className="text-[#596a3c]">
-              /
-            </span>
-          </h1>
-          <p className="mt-5 text-lg tracking-tight text-muted-foreground sm:text-2xl">
-            An open sketchbook for experiments in line and form.
-          </p>
-        </div>
-        <Study />
-      </main>
-      <footer className="folio flex justify-between gap-3 border-t border-foreground py-5 text-muted-foreground">
-        <span>Deadmodel / Index</span>
-        <span>End of sheet</span>
-      </footer>
-    </div>
-  )
-}

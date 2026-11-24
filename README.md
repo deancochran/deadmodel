@@ -1,6 +1,6 @@
 # deadmodel
 
-A static TanStack Start site. The original form study remains at `/`; the ADA denim buyer sheet lives at `/buyer-sheet/`. Both work without a backend. The buyer sheet previews quantities and prices; it does **not** place an order, charge a card, reserve a shirt, or unlock campaign content.
+A single-page dead model storefront built with TanStack Start. The homepage is the shop: explore the ADA denim, check the size Small guide, choose quantities and review an order without leaving the page. Checkout is a preview: it does **not** place an order or collect payment.
 
 ## Develop
 
@@ -11,11 +11,11 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3000/buyer-sheet/. The route prerenders its product, prices, printable size grid and brand notes. `src/features/buyer-sheet/ada.ts` is the source of garment specs, provisional size/SKU IDs, image order and unit prices in USD cents. `order.ts` validates the order draft and calculates the displayed quote. The browser's **Print** action or **Print sheet** produces a filled or blank line sheet on A4 or US Letter.
+Open http://localhost:3000/. The homepage prerenders the product, prices, printable size grid and brand notes. `src/features/storefront/ada.ts` holds the garment specs, sample measurements, provisional size/SKU IDs, image order and unit prices in USD cents. `order.ts` validates the order draft and calculates the displayed quote. **Print details** or the browser's print action produces a filled or blank line sheet on A4 or US Letter.
 
 ### Assets and launch review
 
-`public/brand/ada/` contains temporary reference exports from the [prototype at f29a851](https://github.com/deancochran/deadmodel/tree/f29a851/public/buyer-sheet/assets), not final production masters. Keep the Inter OFL notice with its font. Asset URLs honor the Pages project prefix. Before the homepage cutover:
+`public/brand/ada/` contains temporary reference exports from the [prototype at f29a851](https://github.com/deancochran/deadmodel/tree/f29a851/public/buyer-sheet/assets), not final production masters. Keep the Inter OFL notice with its font. Asset URLs honor the Pages project prefix. Before live sales:
 
 - Replace/approve all four garment views (full length, pockets, fringe, hem), print-quality full-length photography, crops, alt text and usage rights. The fringe reference is only 200×259; it isn't a high-resolution zoom asset.
 - Replace/approve the wordmark, favicon artwork, front/reverse print cards, brand guide, and approved licensed sans/mono fonts. The mono face currently falls back to the system typewriter font.

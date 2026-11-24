@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #f5f3ec;
-  --color-foreground: #1e201b;
-  --color-muted-foreground: #55594e;
-  --color-primary: #25281e;
-  --color-primary-foreground: #f5f3ec;
-  --color-secondary: #dedfd3;
-  --color-secondary-foreground: #25281e;
-  --color-accent: #d3ef80;
-  --color-accent-foreground: #202418;
-  --color-input: #77796d;
-  --color-border: #c2c3b6;
-  --color-ring: #456900;
+  --color-background: #fff;
+  --color-foreground: #101010;
+  --color-muted-foreground: #525252;
+  --color-primary: #101010;
+  --color-primary-foreground: #fff;
+  --color-secondary: #f5f5f5;
+  --color-secondary-foreground: #101010;
+  --color-accent: #101010;
+  --color-accent-foreground: #fff;
+  --color-input: #737373;
+  --color-border: #101010;
+  --color-ring: #101010;
   --color-destructive: #a32d24;
   --font-sans: "Helvetica Neue", Arial, sans-serif;
 }
@@ -24,8 +24,4 @@
   ::selection {
     @apply bg-accent text-accent-foreground;
   }
-}
-
-@utility folio {
-  @apply font-mono text-xs font-medium tracking-widest uppercase;
 }
