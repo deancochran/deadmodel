@@ -1,0 +1,38 @@
+media:
+  input: public/brand/ada/photos
+  output: /brand/ada/photos
+  extensions: [jpg, jpeg, png, webp, avif]
+
+components:
+  photograph:
+    type: object
+    fields:
+      - { name: image, label: Photo, type: image, required: true }
+      - { name: alt, label: Describe what is visible, type: string, required: true }
+
+content:
+  - name: garment
+    label: ADA denim
+    type: file
+    path: content/ada.json
+    format: json
+    fields:
+      - { name: title, label: Product heading, type: string, required: true }
+      - { name: description, label: Product description, type: text, required: true }
+      - {
+          name: front,
+          label: Full-length photo (also used in print and order review),
+          component: photograph,
+        }
+      - { name: pockets, label: Pocket detail, component: photograph }
+      - { name: fringe, label: Fringe detail, component: photograph }
+      - { name: hem, label: Flared hem, component: photograph }
+  - name: story
+    label: Brand story
+    type: file
+    path: content/story.json
+    format: json
+    fields:
+      - { name: heading, label: Story heading, type: string, required: true }
+      - { name: opening, label: Opening paragraph, type: text, required: true }
+      - { name: closing, label: Closing paragraph, type: text, required: true }

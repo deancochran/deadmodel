@@ -4,6 +4,18 @@ A single-page dead model storefront built with TanStack Start. The homepage is t
 
 ## Develop
 
+### Editing the storefront without code
+
+Once `.pages.yml` **and** the accompanying content files are on `main`, open [Pages CMS](https://app.pagescms.org/), select **deancochran/deadmodel** and branch **main**. Invited editors sign in with the email address that received the invitation. Refresh or reopen the repository after the initial setup.
+
+- **ADA denim**: edit the product heading and description or choose/upload a photo in one of the four named slots. Describe each photo for people who cannot see it. The full-length photo also appears in print and order review.
+- **Brand story**: edit the heading and two paragraphs under Brand notes.
+- Click **Save**. A save to `main` is a publishing action, not a draft: GitHub Actions tests the committed content and deploys it if checks pass. Refresh the storefront after the workflow finishes. If a save doesn't appear, check the selected branch and the [workflow status](https://github.com/deancochran/deadmodel/actions/workflows/check.yml).
+
+The editor reads `.pages.yml` at the repository root. The storefront reads the same `content/ada.json` and `content/story.json` that the editor writes. Upload web-ready public photos only, not private originals. Use a new filename when replacing a photo and select it in the product form before saving; uploading by itself doesn't change a gallery slot. Prices, size measurements, order logic and layout are outside this initial CMS configuration.
+
+### Local development
+
 Use Node 22.12+ (or `nvm use`) and npm.
 
 ```sh
