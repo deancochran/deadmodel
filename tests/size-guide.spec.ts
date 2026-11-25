@@ -1,5 +1,6 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
+import guideContent from '../content/size-guide.json' with { type: 'json' }
 
 test('size guide opens independently of the order and always shows the Small sample', async ({
   page,
@@ -8,26 +9,17 @@ test('size guide opens independently of the order and always shows the Small sam
   const trigger = page.getByRole('button', { name: 'Size guide', exact: true })
   const guide = page.getByRole('dialog', { name: 'Size guide' })
   await trigger.click()
-  await expect(guide.getByRole('heading', { name: 'ADA denim · Size Small' })).toBeVisible()
+  await expect(guide.getByRole('heading', { name: /Size Small/ })).toBeVisible()
   await expect(guide.getByRole('columnheader', { name: 'Inches' })).toBeVisible()
   const rows = guide.locator('tbody tr')
-  await expect(rows).toHaveCount(9)
-  const expectedMeasurements = [
-    ['Waist width', '14.5'],
-    ['Front rise', '6.75'],
-    ['Back rise', '11.25'],
-    ['Hip width', '19.5'],
-    ['Thigh width', '10.5'],
-    ['Knee width', '7.2'],
-    ['Leg opening width', '10.75'],
-    ['Inseam', '36'],
-    ['Length', '40.75'],
-  ] as const
-  for (const [i, [label, value]] of expectedMeasurements.entries()) {
-    await expect(rows.nth(i).getByRole('rowheader')).toContainText(label)
-    await expect(rows.nth(i).getByRole('cell')).toHaveText(value)
+  await expect(rows).toHaveCount(guideContent.measurements.length)
+  for (const [i, measurement] of guideContent.measurements.entries()) {
+    await expect(rows.nth(i).getByRole('rowheader')).toContainText(measurement.label)
+    await expect(rows.nth(i).getByRole('cell')).toHaveText(String(measurement.inches))
+    if ('note' in measurement && typeof measurement.note === 'string' && measurement.note)
+      await expect(rows.nth(i)).toContainText(measurement.note)
   }
-  await expect(guide).toContainText('33 cm below crotch')
+  await expect(guide).toContainText(guideContent.description)
   expect(
     (await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa']).analyze()).violations,
   ).toEqual([])

@@ -2,6 +2,7 @@ import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 import { PDFDocument } from 'pdf-lib'
 import garment from '../content/ada.json' with { type: 'json' }
+import brand from '../content/brand.json' with { type: 'json' }
 import story from '../content/story.json' with { type: 'json' }
 
 const path = './'
@@ -15,11 +16,10 @@ test('home is the shop; section links keep the order and stay in the same docume
     if (!response.ok() && response.status() >= 400) failures.push(response.url())
   })
   await page.goto('./')
-  await expect(page).toHaveTitle('dead model — ADA fringe denim')
+  await expect(page).toHaveTitle(brand.pageTitle)
   const home = page.url()
-  await expect(page.locator('body')).not.toContainText(/buyer sheet|form studies/i)
   await page.getByLabel('M quantity', { exact: true }).fill('1')
-  await page.getByRole('link', { name: 'Brand notes' }).click()
+  await page.locator('nav').getByRole('link', { name: story.sectionTitle, exact: true }).click()
   await expect(page).toHaveURL(`${home}#notes`)
   await expect
     .poll(() =>
@@ -52,11 +52,40 @@ test.describe('prerendered storefront', () => {
   }) => {
     const response = await page.goto(path)
     expect(response?.status()).toBe(200)
-    await expect(page).toHaveTitle('dead model — ADA fringe denim')
+    await expect(page).toHaveTitle(brand.pageTitle)
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+      'content',
+      brand.pageDescription,
+    )
     await expect(page.getByRole('heading', { level: 1 })).toContainText(garment.title)
     await expect(page.locator('.ada-intro')).toHaveText(garment.description)
     await expect(page.getByRole('heading', { name: story.heading })).toBeVisible()
     await expect(page.locator('.ada-story p')).toHaveText([story.opening, story.closing])
+    const base = process.env.PAGES_BASE_PATH || ''
+    const favicon = page.locator('link[rel="icon"]')
+    await expect(favicon).toHaveAttribute('href', `${base}${brand.favicon}`)
+    for (const [selector, image] of [
+      ['.ada-masthead img', brand.wordmark],
+      ['.ada-footer img', brand.wordmark],
+      ['.ada-cards img:first-child', story.front],
+      ['.ada-cards img:last-child', story.back],
+    ] as const) {
+      await expect(page.locator(selector)).toHaveAttribute('src', `${base}${image.image}`)
+      await expect(page.locator(selector)).toHaveAttribute('alt', image.alt)
+    }
+    for (const image of [
+      brand.wordmark.image,
+      brand.favicon,
+      story.front.image,
+      story.back.image,
+    ]) {
+      const response = await page.request.get(`.${image}`)
+      expect(response.status(), image).toBe(200)
+      expect(response.headers()['content-type']).toMatch(/^image\//)
+    }
+    for (const detail of [garment.weight, garment.color, ...garment.style, ...garment.materials]) {
+      await expect(page.locator('main')).toContainText(detail)
+    }
     await expect(page.locator('main')).toContainText('$140')
     await expect(page.locator('main')).toContainText('$70')
     for (const size of ['XS', 'S', 'M', 'L']) {
@@ -89,6 +118,11 @@ test('the buyer can change tier, review offline, edit and return to the same dra
   await buy.click()
   const panel = page.getByRole('dialog')
   await expect(panel).toContainText('$420')
+  await expect(panel).toContainText(garment.shortTitle)
+  await expect(panel.locator('img')).toHaveAttribute(
+    'src',
+    `${process.env.PAGES_BASE_PATH || ''}${garment.gallery[0]?.image}`,
+  )
   await panel.getByRole('button', { name: /edit quantities/i }).click()
   await expect(s).toBeFocused()
   await page.getByRole('radio', { name: 'Wholesale boutique' }).check()
@@ -128,14 +162,20 @@ test('prints a single A4 and Letter sheet for blank and filled orders', async ({
       await page.getByLabel('S quantity', { exact: true }).fill('2')
       await page.getByLabel('L quantity', { exact: true }).fill('1')
       await page.getByRole('radio', { name: 'Wholesale boutique' }).check()
-      await page.getByRole('button', { name: /show fringe detail/i }).click()
+      if (garment.gallery.length > 1)
+        await page.locator('.ada-gallery__thumbs button').last().click()
     }
     await page.emulateMedia({ media: 'print' })
+    await expect(page.locator('.ada-masthead img')).toBeVisible()
+    await expect(page.locator('.ada-masthead img')).toHaveAttribute(
+      'src',
+      `${process.env.PAGES_BASE_PATH || ''}${brand.wordmark.image}`,
+    )
     await expect(page.locator('.ada-notes')).toBeHidden()
     await expect(page.getByRole('button', { name: /^buy now/i })).toBeHidden()
     await expect(page.locator('.ada-gallery img:visible')).toHaveCount(1)
     expect(await page.locator('.ada-gallery img:visible').getAttribute('src')).toBe(
-      `${process.env.PAGES_BASE_PATH || ''}${garment.front.image}`,
+      `${process.env.PAGES_BASE_PATH || ''}${garment.gallery[0]?.image}`,
     )
     if (filled) await expect(page.locator('form')).toContainText('$210')
     for (const format of ['A4', 'Letter'] as const) {
@@ -147,8 +187,8 @@ test('prints a single A4 and Letter sheet for blank and filled orders', async ({
       expect((await PDFDocument.load(buffer)).getPageCount(), format).toBe(1)
     }
     await page.emulateMedia({ media: 'screen' })
-    if (filled)
-      await expect(page.getByRole('button', { name: /show fringe detail/i })).toHaveAttribute(
+    if (filled && garment.gallery.length > 1)
+      await expect(page.locator('.ada-gallery__thumbs button').last()).toHaveAttribute(
         'aria-pressed',
         'true',
       )

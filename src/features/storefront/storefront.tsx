@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { ada, assetUrl } from './ada'
-import { brandStory } from './content'
+import { ada } from './ada'
+import { brandStory, photoUrl, siteBrand } from './content'
 import { Gallery } from './gallery'
 import { OrderForm } from './order-form'
 
 function Wordmark({ small = false }: { small?: boolean }) {
   return (
-    <a href="#top" aria-label="dead model — back to top">
+    <a href="#top" aria-label={`${siteBrand.name} — back to top`}>
       <img
-        src={assetUrl('dead-model-wordmark.png')}
-        alt="dead model"
+        src={photoUrl(siteBrand.wordmark.image)}
+        alt={siteBrand.wordmark.alt}
         width="446"
         height="67"
         className={small ? 'w-[105px]' : 'ada-wordmark'}
@@ -54,7 +54,7 @@ export function Storefront() {
               Shop
             </a>
             <a href="#notes" aria-current={atNotes ? 'location' : undefined}>
-              Brand notes
+              {brandStory.sectionTitle}
             </a>
             <Button
               type="button"
@@ -87,7 +87,7 @@ export function Storefront() {
             <OrderForm />
           </section>
           <section ref={notes} className="ada-notes" id="notes" aria-labelledby="ada-notes-title">
-            <h2 id="ada-notes-title">Brand notes</h2>
+            <h2 id="ada-notes-title">{brandStory.sectionTitle}</h2>
             <div className="ada-notes-grid">
               <div className="ada-story">
                 <h3>{brandStory.heading}</h3>
@@ -96,21 +96,21 @@ export function Storefront() {
               </div>
               <figure
                 className="ada-cards"
-                aria-label="Front and reverse of the dead model print card"
+                aria-label={`Front and reverse of the ${siteBrand.name} print card`}
               >
                 <img
                   width="478"
                   height="620"
                   loading="lazy"
-                  src={assetUrl('fringe-poster.webp')}
-                  alt="Front of the print card: a black ink silhouette of fringed denim."
+                  src={photoUrl(brandStory.front.image)}
+                  alt={brandStory.front.alt}
                 />
                 <img
                   width="478"
                   height="620"
                   loading="lazy"
-                  src={assetUrl('signature-card.webp')}
-                  alt="Reverse of the print card, with the dead model wordmark and handwritten signature."
+                  src={photoUrl(brandStory.back.image)}
+                  alt={brandStory.back.alt}
                 />
               </figure>
             </div>

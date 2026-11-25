@@ -1,3 +1,4 @@
+import { z } from 'zod'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -7,7 +8,31 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { smallSampleMeasurements } from './ada'
+import guide from '../../../content/size-guide.json' with { type: 'json' }
+import { ada } from './ada'
+
+const text = z.string().trim().min(1).max(500)
+const measurement = z.object({
+  point: z.string().trim().max(12).nullish(),
+  label: z.string().trim().min(1).max(120),
+  note: z.string().trim().max(500).nullish(),
+  inches: z.number().finite().positive(),
+})
+
+export const sizeGuideSchema = z.object({
+  description: text,
+  measurements: z
+    .array(measurement)
+    .min(1)
+    .max(16)
+    .refine(
+      (measurements) =>
+        new Set(measurements.map((item) => item.label)).size === measurements.length,
+      'Each measurement needs a unique label.',
+    ),
+})
+
+const sizeGuide = sizeGuideSchema.parse(guide)
 
 export function SizeGuide({ disabled }: { disabled: boolean }) {
   return (
@@ -39,13 +64,14 @@ export function SizeGuide({ disabled }: { disabled: boolean }) {
           </DialogClose>
         </header>
         <div className="px-5 py-6">
-          <h3 className="text-2xl font-medium tracking-tight">ADA denim · Size Small</h3>
+          <h3 className="text-2xl font-medium tracking-tight">{ada.shortTitle} · Size Small</h3>
           <DialogDescription className="my-3 text-sm leading-relaxed">
-            Measurements are taken from the finished Small sample, not the body. Widths are measured
-            flat, edge to edge, not around the garment.
+            {sizeGuide.description}
           </DialogDescription>
           <table className="w-full border-collapse text-left text-sm">
-            <caption className="sr-only">ADA size Small sample measurements in inches</caption>
+            <caption className="sr-only">
+              {ada.shortTitle} size Small sample measurements in inches
+            </caption>
             <thead className="border-y border-black font-mono text-xs uppercase">
               <tr>
                 <th scope="col" className="py-2">
@@ -57,10 +83,12 @@ export function SizeGuide({ disabled }: { disabled: boolean }) {
               </tr>
             </thead>
             <tbody>
-              {smallSampleMeasurements.map(({ point, label, note, inches }) => (
-                <tr key={point} className="border-b border-black/20">
+              {sizeGuide.measurements.map(({ point, label, note, inches }) => (
+                <tr key={label} className="border-b border-black/20">
                   <th scope="row" className="py-2 font-normal">
-                    <span className="mr-3 font-mono text-xs text-neutral-600">{point}</span>
+                    {point && (
+                      <span className="mr-3 font-mono text-xs text-neutral-600">{point}</span>
+                    )}
                     {label}
                     {note && <span className="block pl-5 text-xs text-neutral-600">{note}</span>}
                   </th>

@@ -61,7 +61,7 @@ export function OrderForm() {
     <Dialog open={open} onOpenChange={setOpen}>
       <form
         className="ada-order-form"
-        aria-label="ADA denim order preview"
+        aria-label={`${ada.shortTitle} order preview`}
         noValidate
         onSubmit={handleSubmit(previewOrder)}
       >
