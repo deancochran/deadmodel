@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { ada, assetUrl } from './ada'
+import { brandStory } from './content'
 import { Gallery } from './gallery'
 import { OrderForm } from './order-form'
 
@@ -89,16 +90,9 @@ export function Storefront() {
             <h2 id="ada-notes-title">Brand notes</h2>
             <div className="ada-notes-grid">
               <div className="ada-story">
-                <h3>Broadway, after curtain call.</h3>
-                <p>
-                  The lashes stay on. Somebody at the stage door knows where the party is. dead
-                  model takes its cue from the divas who carry a little of the show out into the
-                  street.
-                </p>
-                <p>
-                  The ADA sits low and moves with you. Its wax catches the light, the fringe swings
-                  with the beat, and the dance floor is yours. You take the stage.
-                </p>
+                <h3>{brandStory.heading}</h3>
+                <p>{brandStory.opening}</p>
+                <p>{brandStory.closing}</p>
               </div>
               <figure
                 className="ada-cards"

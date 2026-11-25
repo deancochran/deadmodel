@@ -7,7 +7,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { ada, assetUrl, printHero } from './ada'
+import { ada, printHero } from './ada'
+import { photoUrl } from './content'
 import './gallery.css'
 
 const formatCount = (index: number) =>
@@ -33,13 +34,7 @@ export function Gallery() {
             type="button"
             aria-label={`Enlarge ${selectedPhoto.title.toLowerCase()} photograph`}
           >
-            <img
-              src={assetUrl(selectedPhoto.file)}
-              width={selectedPhoto.width}
-              height={selectedPhoto.height}
-              alt={selectedPhoto.alt}
-              fetchPriority="high"
-            />
+            <img src={photoUrl(selectedPhoto.image)} alt={selectedPhoto.alt} fetchPriority="high" />
             <span className="ada-gallery__expand" aria-hidden="true">
               <svg
                 aria-hidden="true"
@@ -78,9 +73,7 @@ export function Gallery() {
           </DialogDescription>
           <img
             className="ada-gallery__lightbox-image"
-            src={assetUrl(selectedPhoto.file)}
-            width={selectedPhoto.width}
-            height={selectedPhoto.height}
+            src={photoUrl(selectedPhoto.image)}
             alt={selectedPhoto.alt}
           />
           <footer className="ada-gallery__lightbox-footer">
@@ -117,13 +110,7 @@ export function Gallery() {
               aria-pressed={index === selectedIndex}
               onClick={() => selectPhoto(index)}
             >
-              <img
-                src={assetUrl(photo.file)}
-                width={photo.width}
-                height={photo.height}
-                alt=""
-                loading={index === 0 ? 'eager' : 'lazy'}
-              />
+              <img src={photoUrl(photo.image)} alt="" loading={index === 0 ? 'eager' : 'lazy'} />
             </button>
           ))}
         </fieldset>
@@ -135,7 +122,7 @@ export function Gallery() {
         <p className="text-sm print:hidden">
           View photographs:{' '}
           {ada.photos.map((photo) => (
-            <a className="mr-3 underline" key={photo.id} href={assetUrl(photo.file)}>
+            <a className="mr-3 underline" key={photo.id} href={photoUrl(photo.image)}>
               {photo.title}
             </a>
           ))}
@@ -144,9 +131,7 @@ export function Gallery() {
 
       <img
         className="ada-gallery__print-hero"
-        src={assetUrl(printHero.file)}
-        width={printHero.width}
-        height={printHero.height}
+        src={photoUrl(printHero.image)}
         alt={printHero.alt}
       />
     </section>

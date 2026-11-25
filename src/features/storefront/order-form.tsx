@@ -8,7 +8,8 @@ import {
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { ada, assetUrl, printHero, type Size, sizes, tierLabel, tiers } from './ada'
+import { ada, printHero, type Size, sizes, tierLabel, tiers } from './ada'
+import { photoUrl } from './content'
 import {
   blankOrder,
   formatCents,
@@ -224,12 +225,7 @@ export function OrderForm() {
           </DialogDescription>
           <section aria-label="Order review">
             <div className="ada-order-product">
-              <img
-                src={assetUrl(printHero.file)}
-                alt=""
-                width={printHero.width}
-                height={printHero.height}
-              />
+              <img src={photoUrl(printHero.image)} alt="" />
               <div>
                 <p>{quote?.tierLabel}</p>
                 <h3>{ada.shortTitle}</h3>

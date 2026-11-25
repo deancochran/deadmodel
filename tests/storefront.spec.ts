@@ -1,6 +1,8 @@
 import AxeBuilder from '@axe-core/playwright'
 import { expect, test } from '@playwright/test'
 import { PDFDocument } from 'pdf-lib'
+import garment from '../content/ada.json' with { type: 'json' }
+import story from '../content/story.json' with { type: 'json' }
 
 const path = './'
 const tags = ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']
@@ -51,8 +53,10 @@ test.describe('prerendered storefront', () => {
     const response = await page.goto(path)
     expect(response?.status()).toBe(200)
     await expect(page).toHaveTitle('dead model — ADA fringe denim')
-    await expect(page.getByRole('heading', { level: 1 })).toContainText('ADA LOW-RISE')
-    await expect(page.getByRole('heading', { name: 'Broadway, after curtain call.' })).toBeVisible()
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(garment.title)
+    await expect(page.locator('.ada-intro')).toHaveText(garment.description)
+    await expect(page.getByRole('heading', { name: story.heading })).toBeVisible()
+    await expect(page.locator('.ada-story p')).toHaveText([story.opening, story.closing])
     await expect(page.locator('main')).toContainText('$140')
     await expect(page.locator('main')).toContainText('$70')
     for (const size of ['XS', 'S', 'M', 'L']) {
@@ -130,9 +134,8 @@ test('prints a single A4 and Letter sheet for blank and filled orders', async ({
     await expect(page.locator('.ada-notes')).toBeHidden()
     await expect(page.getByRole('button', { name: /^buy now/i })).toBeHidden()
     await expect(page.locator('.ada-gallery img:visible')).toHaveCount(1)
-    await expect(page.locator('.ada-gallery img:visible')).toHaveAttribute(
-      'src',
-      /ada-denim\.webp$/,
+    expect(await page.locator('.ada-gallery img:visible').getAttribute('src')).toBe(
+      `${process.env.PAGES_BASE_PATH || ''}${garment.front.image}`,
     )
     if (filled) await expect(page.locator('form')).toContainText('$210')
     for (const format of ['A4', 'Letter'] as const) {

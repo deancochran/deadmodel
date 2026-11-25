@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import garment from '../content/ada.json' with { type: 'json' }
 
 test.describe('ADA garment gallery', () => {
   test('selects photos and keeps the hero and thumbnail states in sync', async ({ page }) => {
@@ -7,8 +8,13 @@ test.describe('ADA garment gallery', () => {
     const gallery = page.locator('.ada-gallery')
     const hero = gallery.getByRole('button', { name: 'Enlarge full length photograph' })
 
-    await expect(hero.getByRole('img')).toHaveAttribute('alt', /Front of the ADA jean/)
+    await expect(hero.getByRole('img')).toHaveAttribute('alt', garment.front.alt)
     await expect(gallery.locator('[aria-live]').first()).toHaveText('01 / 04')
+    for (const photo of [garment.front, garment.pockets, garment.fringe, garment.hem]) {
+      const response = await page.request.get(`.${photo.image}`)
+      expect(response.ok(), photo.image).toBe(true)
+      expect(response.headers()['content-type']).toMatch(/^image\//)
+    }
 
     await gallery.getByRole('button', { name: 'Show fringe detail' }).click()
 
