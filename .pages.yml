@@ -1,38 +1,150 @@
 media:
-  input: public/brand/ada/photos
-  output: /brand/ada/photos
-  extensions: [jpg, jpeg, png, webp, avif]
+  - name: products
+    label: Garment photographs
+    input: public/brand/ada/photos
+    output: /brand/ada/photos
+    rename: safe
+    extensions: [jpg, jpeg, png, webp, avif]
+  - name: identity
+    label: Logos and browser icons
+    input: public/brand/identity
+    output: /brand/identity
+    rename: safe
+    extensions: [png, jpg, jpeg, webp, avif]
+  - name: editorial
+    label: Story artwork
+    input: public/brand/editorial
+    output: /brand/editorial
+    rename: safe
+    extensions: [jpg, jpeg, png, webp, avif]
 
 components:
-  photograph:
+  artwork:
     type: object
+    required: true
     fields:
-      - { name: image, label: Photo, type: image, required: true }
-      - { name: alt, label: Describe what is visible, type: string, required: true }
+      - name: image
+        label: Artwork
+        type: image
+        required: true
+        options: { media: editorial }
+      - { name: alt, label: Describe the artwork, type: string, required: true }
 
 content:
+  - name: identity
+    label: Brand identity & page details
+    type: file
+    path: content/brand.json
+    operations: { delete: false }
+    format: json
+    fields:
+      - { name: name, label: Brand name, type: string, required: true }
+      - name: wordmark
+        label: Brand logo
+        description: Used at the top and bottom of the shop and on printed product details.
+        type: object
+        required: true
+        fields:
+          - name: image
+            label: Choose or upload your logo
+            type: image
+            required: true
+            options: { media: identity }
+          - { name: alt, label: Logo text for screen readers, type: string, required: true }
+      - name: favicon
+        label: Browser tab icon
+        description: A square PNG that is recognizable at a small size.
+        type: image
+        required: true
+        options: { media: identity, extensions: [png] }
+      - { name: pageTitle, label: Browser tab title, type: string, required: true }
+      - name: pageDescription
+        label: Search description
+        description: A short introduction to the shop that search engines can use.
+        type: text
+        required: true
+
   - name: garment
-    label: ADA denim
+    label: Garment & gallery
     type: file
     path: content/ada.json
+    operations: { delete: false }
     format: json
     fields:
       - { name: title, label: Product heading, type: string, required: true }
+      - { name: shortTitle, label: Short product name, type: string, required: true }
       - { name: description, label: Product description, type: text, required: true }
-      - {
-          name: front,
-          label: Full-length photo (also used in print and order review),
-          component: photograph,
-        }
-      - { name: pockets, label: Pocket detail, component: photograph }
-      - { name: fringe, label: Fringe detail, component: photograph }
-      - { name: hem, label: Flared hem, component: photograph }
+      - { name: weight, label: Fabric weight (include units), type: string, required: true }
+      - { name: color, label: Color, type: string, required: true }
+      - name: style
+        label: Fit and style details
+        type: string
+        required: true
+        list: { min: 1, max: 8, collapsible: false }
+      - name: materials
+        label: Fabric and trim details
+        type: string
+        required: true
+        list: { min: 1, max: 8, collapsible: false }
+      - name: gallery
+        label: Garment photographs
+        description: Add or reorder views. The first image is the main photo and also appears in order review and print.
+        type: object
+        required: true
+        list:
+          min: 1
+          max: 8
+          collapsible: { collapsed: true, summary: "{index}. {title}" }
+        fields:
+          - { name: title, label: View name (e.g. Full length), type: string, required: true }
+          - name: image
+            label: Photo
+            type: image
+            required: true
+            options: { media: products }
+          - { name: alt, label: Describe what is visible, type: string, required: true }
+
   - name: story
-    label: Brand story
+    label: Brand story & artwork
     type: file
     path: content/story.json
+    operations: { delete: false }
     format: json
     fields:
+      - { name: sectionTitle, label: Section and navigation label, type: string, required: true }
       - { name: heading, label: Story heading, type: string, required: true }
       - { name: opening, label: Opening paragraph, type: text, required: true }
       - { name: closing, label: Closing paragraph, type: text, required: true }
+      - { name: front, label: Front of the print card, component: artwork }
+      - { name: back, label: Reverse of the print card, component: artwork }
+
+  - name: sizeguide
+    label: Size Small sample guide
+    type: file
+    path: content/size-guide.json
+    operations: { delete: false }
+    format: json
+    fields:
+      - name: description
+        label: How to read these measurements
+        description: Describe how the finished Small sample was measured. This is not a body-size chart.
+        type: text
+        required: true
+      - name: measurements
+        label: Public Small measurements only
+        description: Enter inches for the Small sample. Do not upload a tech pack or measurements for other sizes.
+        type: object
+        required: true
+        list:
+          min: 1
+          max: 16
+          collapsible: { collapsed: true, summary: "{label}" }
+        fields:
+          - { name: point, label: Reference letter (optional), type: string }
+          - { name: label, label: Measurement name, type: string, required: true }
+          - { name: note, label: Where to measure (optional), type: string }
+          - name: inches
+            label: Inches
+            type: number
+            required: true
+            options: { min: 0.01, step: any }

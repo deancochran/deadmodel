@@ -58,6 +58,7 @@
 
 .ada-gallery__thumbs {
   display: flex;
+  flex-wrap: wrap;
   min-width: 0;
   gap: 8px;
   padding: 0;

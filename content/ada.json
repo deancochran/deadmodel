@@ -1,20 +1,31 @@
 {
   "title": "ADA LOW-RISE WAX BLACK FRINGE DENIM",
   "description": "Cut low on the hip, with a flared hem that falls over the shoe. Deer suede fringe follows the outer leg. Turquoise-colored stones sit against the waxed black denim.",
-  "front": {
-    "image": "/brand/ada/photos/ada-denim.webp",
-    "alt": "Front of the ADA jean on a model, showing black flared legs, side fringe, and turquoise-colored embellishments."
-  },
-  "pockets": {
-    "image": "/brand/ada/photos/ada-pockets.webp",
-    "alt": "Waist and pocket detail with silver hardware and curved stitched motifs."
-  },
-  "fringe": {
-    "image": "/brand/ada/photos/ada-fringe.webp",
-    "alt": "Deer suede fringe at the outer leg beside a turquoise-colored embellishment."
-  },
-  "hem": {
-    "image": "/brand/ada/photos/ada-hem.webp",
-    "alt": "Lower legs of the waxed black flares falling over the shoes."
-  }
+  "shortTitle": "ADA fringe denim",
+  "weight": "12.5oz",
+  "style": ["Low rise", "Flare", "Fringe"],
+  "color": "Waxed black",
+  "materials": ["98% cotton", "2% spandex", "Deer suede"],
+  "gallery": [
+    {
+      "title": "Full length",
+      "image": "/brand/ada/photos/ada-denim.webp",
+      "alt": "Front of the ADA jean on a model, showing black flared legs, side fringe, and turquoise-colored embellishments."
+    },
+    {
+      "title": "Pocket detail",
+      "image": "/brand/ada/photos/ada-pockets.webp",
+      "alt": "Waist and pocket detail with silver hardware and curved stitched motifs."
+    },
+    {
+      "title": "Fringe detail",
+      "image": "/brand/ada/photos/ada-fringe.webp",
+      "alt": "Deer suede fringe at the outer leg beside a turquoise-colored embellishment."
+    },
+    {
+      "title": "Flared hem",
+      "image": "/brand/ada/photos/ada-hem.webp",
+      "alt": "Lower legs of the waxed black flares falling over the shoes."
+    }
+  ]
 }

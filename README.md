@@ -8,11 +8,19 @@ A single-page dead model storefront built with TanStack Start. The homepage is t
 
 Once `.pages.yml` **and** the accompanying content files are on `main`, open [Pages CMS](https://app.pagescms.org/), select **deancochran/deadmodel** and branch **main**. Invited editors sign in with the email address that received the invitation. Refresh or reopen the repository after the initial setup.
 
-- **ADA denim**: edit the product heading and description or choose/upload a photo in one of the four named slots. Describe each photo for people who cannot see it. The full-length photo also appears in print and order review.
-- **Brand story**: edit the heading and two paragraphs under Brand notes.
+- **Brand identity & page details**: change the brand name, horizontal logo and its accessible text, square PNG browser icon, tab title and search description. Change the logo **once**: the header, footer and printed product details use the same artwork. The browser icon is separate; choose something readable when tiny.
+- **Garment & gallery**: edit the product heading, short name, description, weight, color, materials and fit details. Add, replace, reorder or remove still photographs (keep 1–8). Give each view a short name and useful alt text. **The first photo** is the main product image, order-review thumbnail and printed garment photo; put a clear full-length shot first.
+- **Brand story & artwork**: edit the navigation/section label, story headline and paragraphs, and **either side of the print card**. Each side has its own image and description. These artwork images appear in the online story, not in the one-page product printout.
+- **Size Small sample guide**: revise the introduction and the _public_ Small measurement rows (reference letter, measurement name, location note and inches). Do not add grading rules, measurements for other sizes or a private tech pack. Changing order quantities never changes the guide.
 - Click **Save**. A save to `main` is a publishing action, not a draft: GitHub Actions tests the committed content and deploys it if checks pass. Refresh the storefront after the workflow finishes. If a save doesn't appear, check the selected branch and the [workflow status](https://github.com/deancochran/deadmodel/actions/workflows/check.yml).
 
-The editor reads `.pages.yml` at the repository root. The storefront reads the same `content/ada.json` and `content/story.json` that the editor writes. Upload web-ready public photos only, not private originals. Use a new filename when replacing a photo and select it in the product form before saving; uploading by itself doesn't change a gallery slot. Prices, size measurements, order logic and layout are outside this initial CMS configuration.
+**How to replace an image:** open the form where it appears, use the image picker, upload a web-sized public export with a new filename, select it, update the description and save the form. Uploading to the media library alone does not switch the image on the site. Don’t delete the old file until nothing references it. Use a transparent PNG for a wordmark and a square PNG for the favicon. Check the homepage, phone layout and browser print preview after changing a primary photo or logo.
+
+`.pages.yml` points to four JSON files under `content/` plus separate media folders for the garment, identity, and editorial artwork. All uploads are public. The editor intentionally excludes prices, currency, SKUs, the range of sizes that can be ordered, checkout/eligibility rules, technical layout, licensed fonts and accessibility controls. Price changes need owner review because they affect both the displayed price and the order math. No admin interface, database, private assets or credentials are served by the shop.
+
+**What isn't a content field?** The print and expand icons, close buttons, keyboard instructions, errors and no-payment notice are part of the interface, not brand assets. Leave those with the developer. Motion loops and the campaign film need separate decisions about still posters, captions, reduced motion, and who can see the film. Do not upload exclusive media to these public libraries. For a future design refresh, review font licensing, contrast and a print proof rather than changing global CSS from the editor.
+
+**Before the collection grows:** a second garment would need a product collection, not another set of fields on this page. A dedicated image for shared links, campaign media, and a scheduled seasonal launch would also be separate features; adding files to Media alone does not create placements on the storefront.
 
 ### Local development
 
@@ -23,11 +31,11 @@ npm ci
 npm run dev
 ```
 
-Open http://localhost:3000/. The homepage prerenders the product, prices, printable size grid and brand notes. `src/features/storefront/ada.ts` holds the garment specs, sample measurements, provisional size/SKU IDs, image order and unit prices in USD cents. `order.ts` validates the order draft and calculates the displayed quote. **Print details** or the browser's print action produces a filled or blank line sheet on A4 or US Letter.
+Open http://localhost:3000/. The homepage prerenders the product, prices, printable size grid and brand notes. `src/features/storefront/ada.ts` validates garment content alongside developer-owned size/SKU IDs and unit prices in USD cents. `order.ts` validates the order draft and calculates the displayed quote. **Print details** or the browser's print action produces a filled or blank line sheet on A4 or US Letter.
 
 ### Assets and launch review
 
-`public/brand/ada/` contains temporary reference exports from the [prototype at f29a851](https://github.com/deancochran/deadmodel/tree/f29a851/public/buyer-sheet/assets), not final production masters. Keep the Inter OFL notice with its font. Asset URLs honor the Pages project prefix. Before live sales:
+`public/brand/` contains web exports based on the [prototype at f29a851](https://github.com/deancochran/deadmodel/tree/f29a851/public/buyer-sheet/assets), not final production masters. Keep the Inter OFL notice with its font. Asset URLs honor the Pages project prefix. Before live sales:
 
 - Replace/approve all four garment views (full length, pockets, fringe, hem), print-quality full-length photography, crops, alt text and usage rights. The fringe reference is only 200×259; it isn't a high-resolution zoom asset.
 - Replace/approve the wordmark, favicon artwork, front/reverse print cards, brand guide, and approved licensed sans/mono fonts. The mono face currently falls back to the system typewriter font.
