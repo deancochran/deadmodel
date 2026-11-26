@@ -1,14 +1,42 @@
 {
   "description": "Measurements are taken from the finished Small sample, not the body. Widths are measured flat, edge to edge, not around the garment.",
   "measurements": [
-    { "point": "A", "label": "Waist width", "inches": 14.5 },
-    { "point": "B", "label": "Front rise", "note": "Including waistband", "inches": 6.75 },
-    { "point": "C", "label": "Back rise", "note": "Including waistband", "inches": 11.25 },
-    { "point": "D", "label": "Hip width", "note": "7 inches below waist", "inches": 19.5 },
-    { "point": "E", "label": "Thigh width", "note": "Straight across at crotch", "inches": 10.5 },
-    { "point": "F", "label": "Knee width", "note": "33 cm below crotch", "inches": 7.2 },
-    { "point": "G", "label": "Leg opening width", "inches": 10.75 },
-    { "point": "H", "label": "Inseam", "inches": 36 },
-    { "point": "I", "label": "Length", "note": "Outseam", "inches": 40.75 }
+    {
+      "label": "Waist width",
+      "inches": 14.5
+    },
+    {
+      "label": "Front rise",
+      "note": "Including waistband",
+      "inches": 6.75
+    },
+    {
+      "label": "Back rise",
+      "note": "Including waistband",
+      "inches": 11.25
+    },
+    {
+      "label": "Hip width",
+      "note": "7 inches below waist",
+      "inches": 19.5
+    },
+    {
+      "label": "Thigh width",
+      "note": "Straight across at crotch",
+      "inches": 10.5
+    },
+    {
+      "label": "Knee width",
+      "note": "33 cm below crotch",
+      "inches": 7.2
+    },
+    {
+      "label": "Leg opening width",
+      "inches": 10.75
+    },
+    {
+      "label": "Inseam",
+      "inches": 36
+    }
   ]
 }
